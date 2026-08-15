@@ -17,7 +17,7 @@ const GENDERS = [
 
 const STEPS = [
   { n: "01", label: "Pick your occasion" },
-  { n: "02", label: "Add a selfie" },
+  { n: "02", label: "Upload your picture" },
   { n: "03", label: "Get your skin plan" },
   { n: "04", label: "See color-verified outfits" },
   { n: "05", label: "Shop the look" },
@@ -45,7 +45,7 @@ export default function Page() {
   async function onSubmit(e) {
     e.preventDefault();
     if (!selfie) {
-      setError("Add a selfie first.");
+      setError("Upload a picture first.");
       return;
     }
     setLoading(true);
@@ -229,7 +229,7 @@ export default function Page() {
 
             <div>
               <label className="block font-mono text-[11px] tracking-widest text-muted uppercase mb-3">
-                Selfie
+                Picture
               </label>
               {!previewUrl ? (
                 <input type="file" accept="image/*" onChange={onSelfieChange} className="text-xs text-muted" />
@@ -361,6 +361,7 @@ export default function Page() {
                           {o.match_score != null ? (
                             <p className="font-mono text-muted/70 text-xs">
                               {o.match_score} {o.verified ? "✓ verified" : "(best available)"}
+                              {o.color_confidence && <span title="Color confirmed by both the rendered photo and the original reference photo"> · 2x-checked</span>}
                             </p>
                           ) : (
                             <span />
